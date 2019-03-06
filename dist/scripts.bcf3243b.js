@@ -118,22 +118,38 @@ var render = function render(elementDisplay, itemRender) {
   elementDisplay.innerHTML = itemRender;
 };
 
+var changeAdjuster = function changeAdjuster(adjuster, action) {
+  var result;
+
+  if (action === "add") {
+    result = adjuster + 1;
+  } else {
+    if (adjuster > 1) {
+      result = adjuster - 1;
+    } else {
+      result = 1;
+    }
+  }
+
+  return result;
+};
+
 render(workDisplay, workAdjuster);
 render(breakDisplay, breakAdjuster);
 workIncrease.addEventListener("click", function () {
-  workAdjuster++;
+  workAdjuster = changeAdjuster(workAdjuster, "add");
   render(workDisplay, workAdjuster);
 });
 workDecrease.addEventListener("click", function () {
-  workAdjuster--;
+  workAdjuster = changeAdjuster(workAdjuster, "subtract");
   render(workDisplay, workAdjuster);
 });
 breakIncrease.addEventListener("click", function () {
-  breakAdjuster++;
+  breakAdjuster = changeAdjuster(breakAdjuster, "add");
   render(breakDisplay, breakAdjuster);
 });
 breakDecrease.addEventListener("click", function () {
-  breakAdjuster--;
+  breakAdjuster = changeAdjuster(breakAdjuster, "subtract");
   render(breakDisplay, breakAdjuster);
 });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -163,7 +179,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33199" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42753" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

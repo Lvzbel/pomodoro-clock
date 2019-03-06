@@ -12,25 +12,39 @@ const render = (elementDisplay, itemRender) => {
   elementDisplay.innerHTML = itemRender;
 };
 
+const changeAdjuster = (adjuster, action) => {
+  let result;
+  if (action === "add") {
+    result = adjuster + 1;
+  } else {
+    if (adjuster > 1) {
+      result = adjuster - 1;
+    } else {
+      result = 1;
+    }
+  }
+  return result;
+};
+
 render(workDisplay, workAdjuster);
 render(breakDisplay, breakAdjuster);
 
 workIncrease.addEventListener("click", function() {
-  workAdjuster++;
+  workAdjuster = changeAdjuster(workAdjuster, "add");
   render(workDisplay, workAdjuster);
 });
 
 workDecrease.addEventListener("click", function() {
-  workAdjuster--;
+  workAdjuster = changeAdjuster(workAdjuster, "subtract");
   render(workDisplay, workAdjuster);
 });
 
 breakIncrease.addEventListener("click", function() {
-  breakAdjuster++;
+  breakAdjuster = changeAdjuster(breakAdjuster, "add");
   render(breakDisplay, breakAdjuster);
 });
 
 breakDecrease.addEventListener("click", function() {
-  breakAdjuster--;
+  breakAdjuster = changeAdjuster(breakAdjuster, "subtract");
   render(breakDisplay, breakAdjuster);
 });
