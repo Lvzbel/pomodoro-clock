@@ -7,6 +7,9 @@ const workDisplay = document.querySelector("#work-display");
 const breakIncrease = document.querySelector("#increase-break");
 const breakDecrease = document.querySelector("#decrease-break");
 const breakDisplay = document.querySelector("#break-display");
+const start = document.querySelector(".btn-start");
+const stop = document.querySelector(".btn-stop");
+const reset = document.querySelector(".btn-reset");
 const display = document.querySelector(".display");
 
 const setTime = minutes => moment().add(minutes, "minutes");
@@ -36,10 +39,15 @@ const changeAdjuster = (adjuster, action) => {
   return result;
 };
 
+// =========================================================
 // Initial Render of minutes
+// =========================================================
 render(workDisplay, workAdjuster);
 render(breakDisplay, breakAdjuster);
 
+// =========================================================
+// Work and Break Time Events
+// =========================================================
 workIncrease.addEventListener("click", function() {
   workAdjuster = changeAdjuster(workAdjuster, "add");
   workTimer = setTime(workAdjuster);
@@ -64,15 +72,18 @@ breakDecrease.addEventListener("click", function() {
   render(breakDisplay, breakAdjuster);
 });
 
-// const now = moment(300000);
-// // const future = moment().add(5, "minutes");
-// console.log(now.format("mm:ss"));
-
 const timeTracker = (adjuster, time) => {
-  let miliLeft = time - moment();
-  display.innerHTML = moment(miliLeft).format("mm:ss");
+  timeLeft = time - moment();
+  display.innerHTML = moment(timeLeft).format("mm:ss");
 };
 
-setInterval(function() {
+const timer = setInterval(function() {
   timeTracker(workAdjuster, workTimer);
 }, 1000);
+
+// =========================================================
+// Main Time Controls
+// =========================================================
+stop.addEventListener("click", function() {
+  clearInterval(timer);
+});

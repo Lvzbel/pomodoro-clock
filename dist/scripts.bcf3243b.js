@@ -4720,6 +4720,9 @@ var workDisplay = document.querySelector("#work-display");
 var breakIncrease = document.querySelector("#increase-break");
 var breakDecrease = document.querySelector("#decrease-break");
 var breakDisplay = document.querySelector("#break-display");
+var start = document.querySelector(".btn-start");
+var stop = document.querySelector(".btn-stop");
+var reset = document.querySelector(".btn-reset");
 var display = document.querySelector(".display");
 
 var setTime = function setTime(minutes) {
@@ -4750,11 +4753,16 @@ var changeAdjuster = function changeAdjuster(adjuster, action) {
   }
 
   return result;
-}; // Initial Render of minutes
+}; // =========================================================
+// Initial Render of minutes
+// =========================================================
 
 
 render(workDisplay, workAdjuster);
-render(breakDisplay, breakAdjuster);
+render(breakDisplay, breakAdjuster); // =========================================================
+// Work and Break Time Events
+// =========================================================
+
 workIncrease.addEventListener("click", function () {
   workAdjuster = changeAdjuster(workAdjuster, "add");
   workTimer = setTime(workAdjuster);
@@ -4774,18 +4782,22 @@ breakDecrease.addEventListener("click", function () {
   breakAdjuster = changeAdjuster(breakAdjuster, "subtract");
   breakTimer = setTime(breakAdjuster);
   render(breakDisplay, breakAdjuster);
-}); // const now = moment(300000);
-// // const future = moment().add(5, "minutes");
-// console.log(now.format("mm:ss"));
+});
 
 var timeTracker = function timeTracker(adjuster, time) {
-  var miliLeft = time - moment();
-  display.innerHTML = moment(miliLeft).format("mm:ss");
+  timeLeft = time - moment();
+  display.innerHTML = moment(timeLeft).format("mm:ss");
 };
 
-setInterval(function () {
+var timer = setInterval(function () {
   timeTracker(workAdjuster, workTimer);
-}, 1000);
+}, 1000); // =========================================================
+// Main Time Controls
+// =========================================================
+
+stop.addEventListener("click", function () {
+  clearInterval(timer);
+});
 },{"moment":"node_modules/moment/moment.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
