@@ -21,6 +21,8 @@ let workTimer = setTime(workAdjuster);
 let breakTimer = setTime(breakAdjuster);
 let timeLeft = 0;
 
+let timer;
+
 const render = (elementDisplay, itemRender) => {
   elementDisplay.innerHTML = itemRender;
 };
@@ -77,13 +79,15 @@ const timeTracker = (adjuster, time) => {
   display.innerHTML = moment(timeLeft).format("mm:ss");
 };
 
-const timer = setInterval(function() {
-  timeTracker(workAdjuster, workTimer);
-}, 1000);
-
 // =========================================================
 // Main Time Controls
 // =========================================================
+start.addEventListener("click", function() {
+  timer = setInterval(function() {
+    timeTracker(workAdjuster, workTimer);
+  }, 1000);
+});
+
 stop.addEventListener("click", function() {
   clearInterval(timer);
 });

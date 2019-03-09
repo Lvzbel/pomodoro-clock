@@ -4734,6 +4734,7 @@ var breakAdjuster = 5;
 var workTimer = setTime(workAdjuster);
 var breakTimer = setTime(breakAdjuster);
 var timeLeft = 0;
+var timer;
 
 var render = function render(elementDisplay, itemRender) {
   elementDisplay.innerHTML = itemRender;
@@ -4787,14 +4788,16 @@ breakDecrease.addEventListener("click", function () {
 var timeTracker = function timeTracker(adjuster, time) {
   timeLeft = time - moment();
   display.innerHTML = moment(timeLeft).format("mm:ss");
-};
-
-var timer = setInterval(function () {
-  timeTracker(workAdjuster, workTimer);
-}, 1000); // =========================================================
+}; // =========================================================
 // Main Time Controls
 // =========================================================
 
+
+start.addEventListener("click", function () {
+  timer = setInterval(function () {
+    timeTracker(workAdjuster, workTimer);
+  }, 1000);
+});
 stop.addEventListener("click", function () {
   clearInterval(timer);
 });
