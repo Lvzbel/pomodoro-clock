@@ -7,17 +7,16 @@ const workDisplay = document.querySelector("#work-display");
 const breakIncrease = document.querySelector("#increase-break");
 const breakDecrease = document.querySelector("#decrease-break");
 const breakDisplay = document.querySelector("#break-display");
+const display = document.querySelector(".display");
 
-const setTime = minutes =>
-  moment()
-    .second(0)
-    .add(minutes, "minutes");
+const setTime = minutes => moment().add(minutes, "minutes");
 
 let workAdjuster = 25;
 let breakAdjuster = 5;
 
 let workTimer = setTime(workAdjuster);
 let breakTimer = setTime(breakAdjuster);
+let timeLeft = 0;
 
 const render = (elementDisplay, itemRender) => {
   elementDisplay.innerHTML = itemRender;
@@ -64,3 +63,16 @@ breakDecrease.addEventListener("click", function() {
   breakTimer = setTime(breakAdjuster);
   render(breakDisplay, breakAdjuster);
 });
+
+// const now = moment(300000);
+// // const future = moment().add(5, "minutes");
+// console.log(now.format("mm:ss"));
+
+const timeTracker = (adjuster, time) => {
+  let miliLeft = time - moment();
+  display.innerHTML = moment(miliLeft).format("mm:ss");
+};
+
+setInterval(function() {
+  timeTracker(workAdjuster, workTimer);
+}, 1000);

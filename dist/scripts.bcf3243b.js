@@ -4720,15 +4720,17 @@ var workDisplay = document.querySelector("#work-display");
 var breakIncrease = document.querySelector("#increase-break");
 var breakDecrease = document.querySelector("#decrease-break");
 var breakDisplay = document.querySelector("#break-display");
+var display = document.querySelector(".display");
 
 var setTime = function setTime(minutes) {
-  return moment().second(0).add(minutes, "minutes");
+  return moment().add(minutes, "minutes");
 };
 
 var workAdjuster = 25;
 var breakAdjuster = 5;
 var workTimer = setTime(workAdjuster);
 var breakTimer = setTime(breakAdjuster);
+var timeLeft = 0;
 
 var render = function render(elementDisplay, itemRender) {
   elementDisplay.innerHTML = itemRender;
@@ -4772,7 +4774,18 @@ breakDecrease.addEventListener("click", function () {
   breakAdjuster = changeAdjuster(breakAdjuster, "subtract");
   breakTimer = setTime(breakAdjuster);
   render(breakDisplay, breakAdjuster);
-});
+}); // const now = moment(300000);
+// // const future = moment().add(5, "minutes");
+// console.log(now.format("mm:ss"));
+
+var timeTracker = function timeTracker(adjuster, time) {
+  var miliLeft = time - moment();
+  display.innerHTML = moment(miliLeft).format("mm:ss");
+};
+
+setInterval(function () {
+  timeTracker(workAdjuster, workTimer);
+}, 1000);
 },{"moment":"node_modules/moment/moment.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
