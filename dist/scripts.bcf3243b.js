@@ -4803,6 +4803,14 @@ start.addEventListener("click", function () {
 stop.addEventListener("click", function () {
   clearInterval(timer);
 });
+reset.addEventListener("click", function () {
+  clearInterval(timer);
+  workAdjuster = 1500000;
+  breakAdjuster = 300000;
+  render(workDisplay, workAdjuster / 60000);
+  render(breakDisplay, breakAdjuster / 60000);
+  display.innerHTML = "25:00";
+});
 },{"moment":"node_modules/moment/moment.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

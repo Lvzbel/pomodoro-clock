@@ -93,3 +93,12 @@ start.addEventListener("click", function() {
 stop.addEventListener("click", function() {
   clearInterval(timer);
 });
+
+reset.addEventListener("click", function() {
+  clearInterval(timer);
+  workAdjuster = 1500000;
+  breakAdjuster = 300000;
+  render(workDisplay, workAdjuster / 60000);
+  render(breakDisplay, breakAdjuster / 60000);
+  display.innerHTML = "25:00";
+});
