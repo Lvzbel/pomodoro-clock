@@ -92,9 +92,11 @@ const timeTracker = (adjuster, time) => {
 // =========================================================
 start.addEventListener("click", function() {
   timer = setInterval(function() {
-    if (condition) {
+    if (isWork) {
+      timeTracker(workAdjuster, workTimer);
+    } else {
+      timeTracker(breakAdjuster, breakTimer);
     }
-    timeTracker(workAdjuster, workTimer);
   }, 1000);
 });
 
@@ -116,17 +118,13 @@ reset.addEventListener("click", function() {
 // Work and Break Selector
 // =========================================================
 pomodoroBtn.addEventListener("click", function() {
-  console.log(`Was: ${isWork}`);
   if (!isWork) {
     isWork = !isWork;
   }
-  console.log(`Is: ${isWork}`);
 });
 
 breakBtn.addEventListener("click", function() {
-  console.log(`Was: ${isWork}`);
   if (isWork) {
     isWork = !isWork;
   }
-  console.log(`Is: ${isWork}`);
 });

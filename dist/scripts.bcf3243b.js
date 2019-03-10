@@ -4797,9 +4797,11 @@ var timeTracker = function timeTracker(adjuster, time) {
 
 start.addEventListener("click", function () {
   timer = setInterval(function () {
-    if (condition) {}
-
-    timeTracker(workAdjuster, workTimer);
+    if (isWork) {
+      timeTracker(workAdjuster, workTimer);
+    } else {
+      timeTracker(breakAdjuster, breakTimer);
+    }
   }, 1000);
 });
 stop.addEventListener("click", function () {
@@ -4818,22 +4820,14 @@ reset.addEventListener("click", function () {
 // =========================================================
 
 pomodoroBtn.addEventListener("click", function () {
-  console.log("Was: ".concat(isWork));
-
   if (!isWork) {
     isWork = !isWork;
   }
-
-  console.log("Is: ".concat(isWork));
 });
 breakBtn.addEventListener("click", function () {
-  console.log("Was: ".concat(isWork));
-
   if (isWork) {
     isWork = !isWork;
   }
-
-  console.log("Is: ".concat(isWork));
 });
 },{"moment":"node_modules/moment/moment.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
