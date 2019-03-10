@@ -4727,10 +4727,12 @@ var display = document.querySelector(".display");
 
 var setTime = function setTime(minutes) {
   return moment().add(minutes, "minutes");
-};
+}; // Multiply a minute by 60000 to convert to miliseconds
+// Devide a milisecond by 60000 to convert to minutes
 
-var workAdjuster = 25;
-var breakAdjuster = 5;
+
+var workAdjuster = 1500000;
+var breakAdjuster = 300000;
 var workTimer = setTime(workAdjuster);
 var breakTimer = setTime(breakAdjuster);
 var timeLeft = 0;
@@ -4744,12 +4746,12 @@ var changeAdjuster = function changeAdjuster(adjuster, action) {
   var result;
 
   if (action === "add") {
-    result = adjuster + 1;
+    result = adjuster + 60000;
   } else {
-    if (adjuster > 1) {
-      result = adjuster - 1;
+    if (adjuster > 60000) {
+      result = adjuster - 60000;
     } else {
-      result = 1;
+      result = 60000;
     }
   }
 
@@ -4759,30 +4761,30 @@ var changeAdjuster = function changeAdjuster(adjuster, action) {
 // =========================================================
 
 
-render(workDisplay, workAdjuster);
-render(breakDisplay, breakAdjuster); // =========================================================
+render(workDisplay, workAdjuster / 60000);
+render(breakDisplay, breakAdjuster / 60000); // =========================================================
 // Work and Break Time Events
 // =========================================================
 
 workIncrease.addEventListener("click", function () {
   workAdjuster = changeAdjuster(workAdjuster, "add");
   workTimer = setTime(workAdjuster);
-  workTimer = render(workDisplay, workAdjuster);
+  workTimer = render(workDisplay, workAdjuster / 60000);
 });
 workDecrease.addEventListener("click", function () {
   workAdjuster = changeAdjuster(workAdjuster, "subtract");
   workTimer = setTime(workAdjuster);
-  render(workDisplay, workAdjuster);
+  render(workDisplay, workAdjuster / 60000);
 });
 breakIncrease.addEventListener("click", function () {
   breakAdjuster = changeAdjuster(breakAdjuster, "add");
   breakTimer = setTime(breakAdjuster);
-  render(breakDisplay, breakAdjuster);
+  render(breakDisplay, breakAdjuster / 60000);
 });
 breakDecrease.addEventListener("click", function () {
   breakAdjuster = changeAdjuster(breakAdjuster, "subtract");
   breakTimer = setTime(breakAdjuster);
-  render(breakDisplay, breakAdjuster);
+  render(breakDisplay, breakAdjuster / 60000);
 });
 
 var timeTracker = function timeTracker(adjuster, time) {
