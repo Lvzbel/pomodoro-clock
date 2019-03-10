@@ -4720,6 +4720,8 @@ var workDisplay = document.querySelector("#work-display");
 var breakIncrease = document.querySelector("#increase-break");
 var breakDecrease = document.querySelector("#decrease-break");
 var breakDisplay = document.querySelector("#break-display");
+var pomodoroBtn = document.querySelector("#pomodoro");
+var breakBtn = document.querySelector("#break");
 var start = document.querySelector(".btn-start");
 var stop = document.querySelector(".btn-stop");
 var reset = document.querySelector(".btn-reset");
@@ -4727,15 +4729,13 @@ var display = document.querySelector(".display");
 
 var setTime = function setTime(minutes) {
   return moment().second(0).minute(minutes);
-}; // Multiply a minute by 60000 to convert to miliseconds
-// Devide a milisecond by 60000 to convert to minutes
+};
 
-
-var workAdjuster = 1500000;
-var breakAdjuster = 300000;
+var workAdjuster = 25;
+var breakAdjuster = 5;
 var workTimer = setTime(25);
 var breakTimer = setTime(breakAdjuster);
-var timeLeft = 0;
+var isWork = true;
 var timer;
 
 var render = function render(elementDisplay, itemRender) {
@@ -4746,12 +4746,12 @@ var changeAdjuster = function changeAdjuster(adjuster, action) {
   var result;
 
   if (action === "add") {
-    result = adjuster + 60000;
+    result = adjuster + 1;
   } else {
-    if (adjuster > 60000) {
-      result = adjuster - 60000;
+    if (adjuster > 1) {
+      result = adjuster - 1;
     } else {
-      result = 60000;
+      result = 1;
     }
   }
 
@@ -4761,30 +4761,30 @@ var changeAdjuster = function changeAdjuster(adjuster, action) {
 // =========================================================
 
 
-render(workDisplay, workAdjuster / 60000);
-render(breakDisplay, breakAdjuster / 60000); // =========================================================
+render(workDisplay, workAdjuster);
+render(breakDisplay, breakAdjuster); // =========================================================
 // Work and Break Time Events
 // =========================================================
 
 workIncrease.addEventListener("click", function () {
   workAdjuster = changeAdjuster(workAdjuster, "add");
   workTimer = setTime(workAdjuster);
-  workTimer = render(workDisplay, workAdjuster / 60000);
+  workTimer = render(workDisplay, workAdjuster);
 });
 workDecrease.addEventListener("click", function () {
   workAdjuster = changeAdjuster(workAdjuster, "subtract");
   workTimer = setTime(workAdjuster);
-  render(workDisplay, workAdjuster / 60000);
+  render(workDisplay, workAdjuster);
 });
 breakIncrease.addEventListener("click", function () {
   breakAdjuster = changeAdjuster(breakAdjuster, "add");
   breakTimer = setTime(breakAdjuster);
-  render(breakDisplay, breakAdjuster / 60000);
+  render(breakDisplay, breakAdjuster);
 });
 breakDecrease.addEventListener("click", function () {
   breakAdjuster = changeAdjuster(breakAdjuster, "subtract");
   breakTimer = setTime(breakAdjuster);
-  render(breakDisplay, breakAdjuster / 60000);
+  render(breakDisplay, breakAdjuster);
 });
 
 var timeTracker = function timeTracker(adjuster, time) {
@@ -4797,6 +4797,8 @@ var timeTracker = function timeTracker(adjuster, time) {
 
 start.addEventListener("click", function () {
   timer = setInterval(function () {
+    if (condition) {}
+
     timeTracker(workAdjuster, workTimer);
   }, 1000);
 });
@@ -4805,12 +4807,33 @@ stop.addEventListener("click", function () {
 });
 reset.addEventListener("click", function () {
   clearInterval(timer);
-  workAdjuster = 1500000;
-  breakAdjuster = 300000;
-  render(workDisplay, workAdjuster / 60000);
-  render(breakDisplay, breakAdjuster / 60000);
+  workAdjuster = 25;
+  breakAdjuster = 5;
+  render(workDisplay, workAdjuster);
+  render(breakDisplay, breakAdjuster);
   workTimer = setTime(25);
-  display.innerHTML = "25:00";
+  display.innerHTML = "00:00";
+}); // =========================================================
+// Work and Break Selector
+// =========================================================
+
+pomodoroBtn.addEventListener("click", function () {
+  console.log("Was: ".concat(isWork));
+
+  if (!isWork) {
+    isWork = !isWork;
+  }
+
+  console.log("Is: ".concat(isWork));
+});
+breakBtn.addEventListener("click", function () {
+  console.log("Was: ".concat(isWork));
+
+  if (isWork) {
+    isWork = !isWork;
+  }
+
+  console.log("Is: ".concat(isWork));
 });
 },{"moment":"node_modules/moment/moment.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

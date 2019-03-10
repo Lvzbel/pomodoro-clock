@@ -7,6 +7,10 @@ const workDisplay = document.querySelector("#work-display");
 const breakIncrease = document.querySelector("#increase-break");
 const breakDecrease = document.querySelector("#decrease-break");
 const breakDisplay = document.querySelector("#break-display");
+
+const pomodoroBtn = document.querySelector("#pomodoro");
+const breakBtn = document.querySelector("#break");
+
 const start = document.querySelector(".btn-start");
 const stop = document.querySelector(".btn-stop");
 const reset = document.querySelector(".btn-reset");
@@ -17,14 +21,13 @@ const setTime = minutes =>
     .second(0)
     .minute(minutes);
 
-// Multiply a minute by 60000 to convert to miliseconds
-// Devide a milisecond by 60000 to convert to minutes
-let workAdjuster = 1500000;
-let breakAdjuster = 300000;
+let workAdjuster = 25;
+let breakAdjuster = 5;
 
 let workTimer = setTime(25);
 let breakTimer = setTime(breakAdjuster);
-let timeLeft = 0;
+
+let isWork = true;
 
 let timer;
 
@@ -35,12 +38,12 @@ const render = (elementDisplay, itemRender) => {
 const changeAdjuster = (adjuster, action) => {
   let result;
   if (action === "add") {
-    result = adjuster + 60000;
+    result = adjuster + 1;
   } else {
-    if (adjuster > 60000) {
-      result = adjuster - 60000;
+    if (adjuster > 1) {
+      result = adjuster - 1;
     } else {
-      result = 60000;
+      result = 1;
     }
   }
   return result;
@@ -49,8 +52,8 @@ const changeAdjuster = (adjuster, action) => {
 // =========================================================
 // Initial Render of minutes
 // =========================================================
-render(workDisplay, workAdjuster / 60000);
-render(breakDisplay, breakAdjuster / 60000);
+render(workDisplay, workAdjuster);
+render(breakDisplay, breakAdjuster);
 
 // =========================================================
 // Work and Break Time Events
@@ -58,25 +61,25 @@ render(breakDisplay, breakAdjuster / 60000);
 workIncrease.addEventListener("click", function() {
   workAdjuster = changeAdjuster(workAdjuster, "add");
   workTimer = setTime(workAdjuster);
-  workTimer = render(workDisplay, workAdjuster / 60000);
+  workTimer = render(workDisplay, workAdjuster);
 });
 
 workDecrease.addEventListener("click", function() {
   workAdjuster = changeAdjuster(workAdjuster, "subtract");
   workTimer = setTime(workAdjuster);
-  render(workDisplay, workAdjuster / 60000);
+  render(workDisplay, workAdjuster);
 });
 
 breakIncrease.addEventListener("click", function() {
   breakAdjuster = changeAdjuster(breakAdjuster, "add");
   breakTimer = setTime(breakAdjuster);
-  render(breakDisplay, breakAdjuster / 60000);
+  render(breakDisplay, breakAdjuster);
 });
 
 breakDecrease.addEventListener("click", function() {
   breakAdjuster = changeAdjuster(breakAdjuster, "subtract");
   breakTimer = setTime(breakAdjuster);
-  render(breakDisplay, breakAdjuster / 60000);
+  render(breakDisplay, breakAdjuster);
 });
 
 const timeTracker = (adjuster, time) => {
@@ -89,6 +92,8 @@ const timeTracker = (adjuster, time) => {
 // =========================================================
 start.addEventListener("click", function() {
   timer = setInterval(function() {
+    if (condition) {
+    }
     timeTracker(workAdjuster, workTimer);
   }, 1000);
 });
@@ -99,10 +104,29 @@ stop.addEventListener("click", function() {
 
 reset.addEventListener("click", function() {
   clearInterval(timer);
-  workAdjuster = 1500000;
-  breakAdjuster = 300000;
-  render(workDisplay, workAdjuster / 60000);
-  render(breakDisplay, breakAdjuster / 60000);
+  workAdjuster = 25;
+  breakAdjuster = 5;
+  render(workDisplay, workAdjuster);
+  render(breakDisplay, breakAdjuster);
   workTimer = setTime(25);
-  display.innerHTML = "25:00";
+  display.innerHTML = "00:00";
+});
+
+// =========================================================
+// Work and Break Selector
+// =========================================================
+pomodoroBtn.addEventListener("click", function() {
+  console.log(`Was: ${isWork}`);
+  if (!isWork) {
+    isWork = !isWork;
+  }
+  console.log(`Is: ${isWork}`);
+});
+
+breakBtn.addEventListener("click", function() {
+  console.log(`Was: ${isWork}`);
+  if (isWork) {
+    isWork = !isWork;
+  }
+  console.log(`Is: ${isWork}`);
 });
