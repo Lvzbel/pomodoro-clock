@@ -1,3 +1,6 @@
+import "../sass/styles.scss";
+import "bootstrap";
+
 var moment = require("moment");
 moment().format();
 

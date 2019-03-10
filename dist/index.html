@@ -5,31 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pomodoro Timer</title>
-  </head>
+  <link rel="stylesheet" href="/scripts.bcf3243b.css"></head>
   <body>
     <div class="container">
       <h1>Pomodoro Timer</h1>
-      <h2>By Rodrigo O. Coto</h2>
       <div class="content">
         <div class="work-adjuster">
-          <button class="btn" id="increase-work">Increase</button>
-          <button class="btn" id="decrease-work">Decrease</button>
+          <button class="btn btn-outline-secondary" id="increase-work">
+            Increase
+          </button>
           <p id="work-display"></p>
+          <button class="btn btn-outline-secondary" id="decrease-work">
+            Decrease
+          </button>
         </div>
         <div class="break-adjuster">
-          <button class="btn" id="increase-break">Increase</button>
-          <button class="btn" id="decrease-break">Decrease</button>
+          <button class="btn btn-outline-secondary" id="increase-break">
+            Increase
+          </button>
           <p id="break-display"></p>
+          <button class="btn btn-outline-secondary" id="decrease-break">
+            Decrease
+          </button>
         </div>
         <div class="main">
-          <button class="btn" id="pomodoro">Pomodoro</button>
-          <button class="btn" id="break">Break</button>
+          <button class="btn btn-primary btn-lg" id="pomodoro">Pomodoro</button>
+          <button class="btn btn-primary btn-lg" id="break">Break</button>
           <div class="display"></div>
-          <button class="btn btn-start">Start</button>
-          <button class="btn btn-stop">Stop</button>
-          <button class="btn btn-reset">Reset</button>
+          <button class="btn btn-success btn-start">Start</button>
+          <button class="btn btn-danger btn-stop">Stop</button>
+          <button class="btn btn-secondary btn-reset">Reset</button>
         </div>
       </div>
+      <h3>By Rodrigo O. Coto</h3>
     </div>
     <script src="/scripts.bcf3243b.js"></script>
   </body>
