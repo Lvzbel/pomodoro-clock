@@ -4733,7 +4733,7 @@ var setTime = function setTime(minutes) {
 
 var workAdjuster = 25;
 var breakAdjuster = 5;
-var workTimer = setTime(25);
+var workTimer = setTime(workAdjuster);
 var breakTimer = setTime(breakAdjuster);
 var isWork = true;
 var timer;

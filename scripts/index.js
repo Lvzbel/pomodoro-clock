@@ -24,7 +24,7 @@ const setTime = minutes =>
 let workAdjuster = 25;
 let breakAdjuster = 5;
 
-let workTimer = setTime(25);
+let workTimer = setTime(workAdjuster);
 let breakTimer = setTime(breakAdjuster);
 
 let isWork = true;
