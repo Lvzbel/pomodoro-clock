@@ -12,7 +12,10 @@ const stop = document.querySelector(".btn-stop");
 const reset = document.querySelector(".btn-reset");
 const display = document.querySelector(".display");
 
-const setTime = minutes => moment().add(minutes, "minutes");
+const setTime = minutes =>
+  moment()
+    .second(0)
+    .minute(minutes);
 
 // Multiply a minute by 60000 to convert to miliseconds
 // Devide a milisecond by 60000 to convert to minutes
@@ -77,11 +80,8 @@ breakDecrease.addEventListener("click", function() {
 });
 
 const timeTracker = (adjuster, time) => {
-  const now = moment();
-  console.log(`Now: ${now}`);
-  console.log(`adjuster: ${time}`);
-  timeLeft = time - now;
-  display.innerHTML = moment(timeLeft).format("mm:ss");
+  time.subtract(1, "seconds");
+  display.innerHTML = time.format("mm:ss");
 };
 
 // =========================================================
@@ -103,5 +103,6 @@ reset.addEventListener("click", function() {
   breakAdjuster = 300000;
   render(workDisplay, workAdjuster / 60000);
   render(breakDisplay, breakAdjuster / 60000);
+  workTimer = setTime(25);
   display.innerHTML = "25:00";
 });

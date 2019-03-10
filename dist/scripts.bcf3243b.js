@@ -4726,7 +4726,7 @@ var reset = document.querySelector(".btn-reset");
 var display = document.querySelector(".display");
 
 var setTime = function setTime(minutes) {
-  return moment().add(minutes, "minutes");
+  return moment().second(0).minute(minutes);
 }; // Multiply a minute by 60000 to convert to miliseconds
 // Devide a milisecond by 60000 to convert to minutes
 
@@ -4788,11 +4788,8 @@ breakDecrease.addEventListener("click", function () {
 });
 
 var timeTracker = function timeTracker(adjuster, time) {
-  var now = moment();
-  console.log("Now: ".concat(now));
-  console.log("adjuster: ".concat(time));
-  timeLeft = time - now;
-  display.innerHTML = moment(timeLeft).format("mm:ss");
+  time.subtract(1, "seconds");
+  display.innerHTML = time.format("mm:ss");
 }; // =========================================================
 // Main Time Controls
 // =========================================================
@@ -4812,6 +4809,7 @@ reset.addEventListener("click", function () {
   breakAdjuster = 300000;
   render(workDisplay, workAdjuster / 60000);
   render(breakDisplay, breakAdjuster / 60000);
+  workTimer = setTime(25);
   display.innerHTML = "25:00";
 });
 },{"moment":"node_modules/moment/moment.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
