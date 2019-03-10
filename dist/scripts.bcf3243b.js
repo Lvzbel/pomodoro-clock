@@ -4733,7 +4733,7 @@ var setTime = function setTime(minutes) {
 
 var workAdjuster = 1500000;
 var breakAdjuster = 300000;
-var workTimer = setTime(workAdjuster);
+var workTimer = setTime(25);
 var breakTimer = setTime(breakAdjuster);
 var timeLeft = 0;
 var timer;
@@ -4788,7 +4788,10 @@ breakDecrease.addEventListener("click", function () {
 });
 
 var timeTracker = function timeTracker(adjuster, time) {
-  timeLeft = time - moment();
+  var now = moment();
+  console.log("Now: ".concat(now));
+  console.log("adjuster: ".concat(time));
+  timeLeft = time - now;
   display.innerHTML = moment(timeLeft).format("mm:ss");
 }; // =========================================================
 // Main Time Controls

@@ -19,7 +19,7 @@ const setTime = minutes => moment().add(minutes, "minutes");
 let workAdjuster = 1500000;
 let breakAdjuster = 300000;
 
-let workTimer = setTime(workAdjuster);
+let workTimer = setTime(25);
 let breakTimer = setTime(breakAdjuster);
 let timeLeft = 0;
 
@@ -77,7 +77,10 @@ breakDecrease.addEventListener("click", function() {
 });
 
 const timeTracker = (adjuster, time) => {
-  timeLeft = time - moment();
+  const now = moment();
+  console.log(`Now: ${now}`);
+  console.log(`adjuster: ${time}`);
+  timeLeft = time - now;
   display.innerHTML = moment(timeLeft).format("mm:ss");
 };
 
